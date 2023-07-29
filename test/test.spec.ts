@@ -25,4 +25,9 @@ it('IndexedDB', async () => {
   // cache miss
   buffer = await lazyCache.get('key', 'hsah', '333')
   expect(buffer.byteLength).toEqual(3)
+
+  const db = await lazyCache.getDB()
+  expect(await db?.count('hash')).toEqual(1)
+  await lazyCache.invalidate()
+  expect(await db?.count('hash')).toEqual(0)
 })

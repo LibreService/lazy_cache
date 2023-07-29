@@ -34,6 +34,11 @@ class LazyCache {
     await db?.put(HASH, hash, key)
     return buffer
   }
+
+  async invalidate () {
+    const db = await this.getDB()
+    return db?.clear(HASH)
+  }
 }
 
 export {
